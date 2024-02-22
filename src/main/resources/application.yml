@@ -12,5 +12,5 @@ spring:
   driver-class-name: com.mysql.cj.jdbc.Driver
 
 jwt:
-  key: ${JWT_KEY}
+  key: 68CA336C5E5E8EA2D79342617A68F163DDBA75BB44BD3DDCA197ED8655249A7B2E37A66
   access-token-expiration: 3600000
