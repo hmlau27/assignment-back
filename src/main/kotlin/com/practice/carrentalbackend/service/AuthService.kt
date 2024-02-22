@@ -28,7 +28,8 @@ class AuthService(
         val user = userDetailsService.loadUserByUsername(authRequest.email)
         val accessToken = tokenService.generate(user)
         val userRole = userRepository.findRoleByEmail(user.username)
-        return AuthenticationResponse(accessToken, user.username, userRole)
+
+        return if (userRole == null) throw Exception("Invalid credentials provided") else AuthenticationResponse(accessToken, user.username, userRole)
     }
 
     fun registerUser(user: User): String {

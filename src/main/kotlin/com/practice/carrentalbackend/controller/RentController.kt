@@ -22,8 +22,8 @@ class RentController(val rentService: RentService) {
         return ResponseEntity.ok(rentService.getAll())
     }
 
-    @PostMapping("/user/{userId}/car/{carId}")
-    fun bookCar(@RequestParam("rentStart") rentStart: LocalDate, @RequestParam("rentEnd") rentEnd: LocalDate, @PathVariable userId: Long, @PathVariable carId: Long) : ResponseEntity<String> {
-        return ResponseEntity.ok(rentService.rentCar(rentStart, rentEnd, userId, carId))
+    @PostMapping("/email/{email}/car/{carId}")
+    fun bookCar(@RequestParam("rentStart") rentStart: LocalDate, @RequestParam("rentEnd") rentEnd: LocalDate, @PathVariable email: String, @PathVariable carId: Long) : ResponseEntity<String> {
+        return ResponseEntity.ok(rentService.rentCar(rentStart, rentEnd, email, carId))
     }
 }

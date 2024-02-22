@@ -8,13 +8,8 @@ import java.util.*
 
 @Service
 class UserServiceImpl(val userRepository: UserRepository) : UserService {
-    override fun getById(userId: Long): Optional<User> {
-        return userRepository.findById(userId)
+    override fun findByEmail(email: String): User? {
+        return userRepository.findByEmail(email)
     }
 
-    override fun addUser(user: User): String {
-        userRepository.save(user)
-
-        return "User saved successfully."
-    }
 }

@@ -13,12 +13,14 @@ import java.util.UUID
 class RentServiceImpl(val rentRepository: RentRepository, val userService: UserService, val carService: CarService):
     RentService {
 
-    override fun rentCar(rentStart: LocalDate, rentEnd: LocalDate, userId: Long, carId: Long): String {
-        val user = userService.getById(userId)
+    override fun rentCar(rentStart: LocalDate, rentEnd: LocalDate, email: String, carId: Long): String {
+        val user = userService.findByEmail(email)
         val car = carService.getById(carId)
 
-        val rent = Rent(null, rentStart, rentEnd, user.get(), car.get(), UUID.randomUUID().toString());
-        rentRepository.save(rent);
+        val rent = user?.let { Rent(null, rentStart, rentEnd, it, car.get(), UUID.randomUUID().toString()) };
+        if (rent != null) {
+            rentRepository.save(rent)
+        };
 
         return "Car $carId rented successfully."
     }

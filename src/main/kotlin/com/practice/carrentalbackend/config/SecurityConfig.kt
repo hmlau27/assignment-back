@@ -21,10 +21,10 @@ class SecurityConfig(
         http
             .csrf { it.disable() }
             .authorizeHttpRequests{
-                it.requestMatchers("/auth/**", "/car/**")
+                it
+                    .requestMatchers(HttpMethod.POST, "/car/add").hasRole("ADMIN")
+                    .requestMatchers("/auth/**", "/car/**")
                     .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
-                    .requestMatchers("/user/**").hasRole("ADMIN")
                     .anyRequest().fullyAuthenticated()
             }.sessionManagement{
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

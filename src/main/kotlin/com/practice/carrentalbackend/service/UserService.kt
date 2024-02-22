@@ -5,6 +5,5 @@ import org.springframework.http.ResponseEntity
 import java.util.Optional
 
 interface UserService {
-    fun getById(userId: Long): Optional<User>
-    fun addUser(user: User): String
+    fun findByEmail(email: String): User?
 }
