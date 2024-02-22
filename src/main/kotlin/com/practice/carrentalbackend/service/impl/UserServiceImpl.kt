@@ -1,0 +1,20 @@
+package com.practice.carrentalbackend.service.impl
+
+import com.practice.carrentalbackend.repository.UserRepository
+import com.practice.carrentalbackend.service.UserService
+import com.practice.carrentalbackend.entity.User
+import org.springframework.stereotype.Service
+import java.util.*
+
+@Service
+class UserServiceImpl(val userRepository: UserRepository) : UserService {
+    override fun getById(userId: Long): Optional<User> {
+        return userRepository.findById(userId)
+    }
+
+    override fun addUser(user: User): String {
+        userRepository.save(user)
+
+        return "User saved successfully."
+    }
+}
